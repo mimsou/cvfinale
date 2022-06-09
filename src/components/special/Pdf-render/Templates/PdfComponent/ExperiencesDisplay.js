@@ -170,7 +170,7 @@ const ExperiencesDisplay = (props) => {
     return <View><Text>sss</Text></View>;
   } else {
     return (
-      <View wrap={false}  style={styles.maincontainer}>
+       <View   style={styles.maincontainer}>
         <View style={styles.head}>
           <View style={styles.headChild}>{getTitle()}</View>
           <View style={styles.periodChild}>{getPeriode()}</View>

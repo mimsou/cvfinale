@@ -10,10 +10,12 @@ const Competance = (props) => {
     const style = props.style ? props.style : null;
 
     if (typeof model.competance != "undefined") {
+        const position = props.PdfDataModel.preference.sectionPostion.Competances
         return model.competance.map((vals, index) => {
             return (
                 <View key={index}>
                     <RatingDisplay
+                        position={position}
                         PdfDataModel={props.PdfDataModel}
                         style={style}
                         libelle={vals.libelle.value}

@@ -25,6 +25,16 @@ const preference = {
         Competances:false,
         Langue:false,
         CentreInteret:false
+    },
+    "sectionPostion":{
+        ProfilePersonel:"g",
+        DescriptionProfil:"d",
+        Fromations:"d",
+        ExperienceProfessionel:"d",
+        Stage:"d",
+        Competances:"g",
+        Langue:"g",
+        CentreInteret:"g"
     }
 }
 

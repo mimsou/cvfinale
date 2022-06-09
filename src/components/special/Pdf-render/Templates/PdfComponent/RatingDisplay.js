@@ -11,7 +11,7 @@ import {
   Svg,
 } from "@react-pdf/renderer";
 import lighDot from "../images/lightDot.png";
-import {pdfStyles} from "./PdfStyles";
+import {pdfStyles , pdfStyles_d} from "./PdfStyles";
 import darkDot from "../images/darkDot.png";
 import SvgRender from "./SvgRender";
 import {devider, dot} from "./SvgIcones";
@@ -22,11 +22,16 @@ import {devider, dot} from "./SvgIcones";
 const RatingDisplay = (props) => {
 
 
+  
   let styles = {}
   if(props.style){
     styles = StyleSheet.create(props.style);
   }else{
-    styles = StyleSheet.create(pdfStyles(props));
+    if(props.position == "g"){
+      styles = StyleSheet.create(pdfStyles(props));
+    }else if(props.position == "d"){
+      styles = StyleSheet.create(pdfStyles_d(props));
+    }  
   }
 
   const colorA = (props.PdfDataModel.preference?.Palette?.ColorA != "undefined") ?  props.PdfDataModel.preference?.Palette?.ColorA : "#264653"

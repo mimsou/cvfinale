@@ -8,11 +8,11 @@ const Stage = (props) => {
 
     const styles = StyleSheet.create(pdfStyles(props));
     const model = { ...props.PdfDataModel.data };
-
+    const position = props.PdfDataModel.preference.sectionPostion.Stage
     if (typeof model.Stages != "undefined") {
         return model.Stages.map((vals, index) => {
             return (
-                <ExperiencesDisplay key={index} dataModel={vals}>
+                <ExperiencesDisplay    position={position} key={index} dataModel={vals}>
                     {" "}
                 </ExperiencesDisplay>
             );

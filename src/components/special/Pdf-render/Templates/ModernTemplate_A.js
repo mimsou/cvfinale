@@ -187,6 +187,7 @@ const ModernTemplateA = (props) => {
             <Text style={styles.descriptionWarp} >{getDescription(props)}</Text>
             <ProfileDescription PdfDataModel={props.PdfDataModel}   />
               {GetBlocks("bigBlok")}
+              {GetBlocks("Blok")} 
           </View>
 
         </Page>

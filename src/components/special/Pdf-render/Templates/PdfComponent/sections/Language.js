@@ -8,13 +8,14 @@ const Language = (props) => {
 
 
     const style = props.style ? props.style : null;
-
+    const position = props.PdfDataModel.preference.sectionPostion.Langue
     const model = { ...props.PdfDataModel.data };
     if (typeof model.langue != "undefined") {
         return model.langue.map((vals, index) => {
             return (
                 <View key={index}>
                     <RatingDisplay
+                        position={position}
                         PdfDataModel={props.PdfDataModel}
                         style={style}
                         libelle={vals.libelle.value}
