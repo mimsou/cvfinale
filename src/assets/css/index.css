@@ -622,7 +622,7 @@ section {
 .SectionHeading{
   padding: 18px !important;
   padding-top: 13px;
-  padding-left: 65px !important;
+  padding-left: 35px !important;
   font-size: 16px;
 }
 
@@ -801,6 +801,10 @@ section {
   transform: rotate(360deg);
 }
 
+.position_area_container{
+  
+}
+
 
 .selection_button{
   width: 100%;
@@ -810,12 +814,20 @@ section {
 }
 
 .remove_section_cione{
+  margin: 5px 10px;
   font-size: 20px;
-  color: #817474;
-  margin: 4px;
-  left: 28px;
-  position: absolute;
+  color: #a3a3a3;
+   cursor: pointer;
+}
+
+.position_widget_bloc{
+  border: 1px solid #a3a3a3;
+  padding: 0px 5px;
+  margin: 0px 5px;
+  color: #a3a3a3;
   cursor: pointer;
+  margin-right: 30px;
+  box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
 }
 
 .cv_new_title{

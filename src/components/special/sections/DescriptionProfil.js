@@ -80,7 +80,7 @@ const DescriptionProfil = (props) => {
       <div  style={props.show ? {} : { display:"none" } }  className="MainSectionWarp">
       <Accordion flush expanded={!Collapsed} onChange={(e,expanded)=>setCollapsed(!expanded)} style={style.bgItem}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />} className="SectionHeading" >
-      <L>Présentation générale</L>  <DashCircle className="remove_section_cione" onClick={(e)=>{e.stopPropagation() ;props.removeSection(props.name);}}  />
+      <DashCircle className="remove_section_cione" onClick={(e)=>{e.stopPropagation() ;props.removeSection(props.name);}}  /> <L>Présentation générale</L>  
         </AccordionSummary>
         {!Collapsed && (
           <AccordionDetails>

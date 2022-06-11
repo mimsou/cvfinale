@@ -23,8 +23,11 @@ export  const pdfStyles = (props) => {
                 fontFamily: props.PdfDataModel.preference?.Font?.name,
         },
         titleSections: {
-            margin: "15px",
-                color:"#5e5e5e"
+            paddingTop:"15px",
+            margin: "5px",
+            fontSize:"13px",
+            fontWeight:"bold",
+            color:"#FFFFFF"
         },
         sectionProfil: {
 
@@ -63,7 +66,7 @@ export  const pdfStyles = (props) => {
         } ,
         sideBarSection: {
             padding: "5px",
-                lineHeight: "2",
+            lineHeight: "2",
         },
         sideBartitle: {
                 color: colorC,
@@ -194,7 +197,7 @@ export  const pdfStyles_d = (props) => {
         },
         titleSections: {
             margin: "15px",
-                color:"#5e5e5e"
+            color:"#5e5e5e"
         },
         sectionProfil: {
 
@@ -236,14 +239,13 @@ export  const pdfStyles_d = (props) => {
                 lineHeight: "2",
         },
         sideBartitle: {
-                color: colorC,
+                color:"#5e5e5e",
                 display:"list-item",
-                fontSize: "14px",
-                marginBottom: "0px",
+                fontSize: "18px",
+                marginBottom: "15px",
                 paddingTop:"10px",
                 marginTop:"20px",
                 marginLeft:"-5px",
-                fontWeight:"bold",
                 paddingLeft:"20px",
                 borderBottomRightRadius:"20%",
                 borderTopRightRadius:"20%",
@@ -254,7 +256,7 @@ export  const pdfStyles_d = (props) => {
         },
         sideText: {
                 color: "#000000",
-                fontSize: "10px",
+                fontSize: "12px",
                 padding: "5px",
                 display:"flex",
                 flexDirection: "row",
@@ -304,14 +306,14 @@ export  const pdfStyles_d = (props) => {
        maincontainer: {
            display: "flex",
            flexDirection: "row",
-           width: "300px",
+           width: "450",
            marginLeft:"-5px",
           
        },
        container: {
            display: "flex",
            flexDirection: "row",
-           width: "150px",
+           width: "225px",
        },
        circle: {
            margin: "1px",
@@ -320,7 +322,7 @@ export  const pdfStyles_d = (props) => {
            height: "10px",
        },
        Sidefill:{
-           color: "#000000",
+           color: "#5e5e5e",
         }
     }
 }

@@ -19,7 +19,7 @@ import ProfileDescription from "./PdfComponent/sections/ProfileDescription";
 import Experience from "./PdfComponent/sections/Experience";
 import CentreInteret from "./PdfComponent/sections/CentreInteret";
 import Stage from "./PdfComponent/sections/Stage";
-import {pdfStyles} from "./PdfComponent/PdfStyles";
+import {pdfStyles,pdfStyles_d} from "./PdfComponent/PdfStyles";
 import {getFullname,getAvatarImage,getDescription} from "./PdfComponent/pdfContentHelper";
 import Formation from "./PdfComponent/sections/Formation";
 
@@ -29,7 +29,13 @@ const ModernTemplateA = (props) => {
   const colorC = (props.PdfDataModel.preference?.Palette?.ColorC != "undefined") ?  props.PdfDataModel.preference?.Palette?.ColorC : "#e9c46a"
   const colorB = (props.PdfDataModel.preference?.Palette?.ColorB != "undefined") ?  props.PdfDataModel.preference?.Palette?.ColorB : "#e9c46a"
 
-  let extendedStyle = pdfStyles(props)
+  
+  const getPosition = (name) => {
+    return  props.PdfDataModel.preference.sectionPostion[name]
+}
+
+const  extendStyle  = (extendedStyle,position) => {
+
 
   extendedStyle.sectionExperience = {
     backgroundColor: "transparent",
@@ -74,9 +80,22 @@ const ModernTemplateA = (props) => {
         fontSize: "18px",
         color: colorC
   }
+  
+  return StyleSheet.create(extendedStyle);
 
+}
 
-  const styles = StyleSheet.create(extendedStyle);
+const getStyle = (position) => {
+if(position=="g"){
+   return  extendStyle(pdfStyles(props),position) 
+}else{
+    return  extendStyle(pdfStyles_d(props),position) 
+}
+}
+
+const styles  = getStyle("g")
+
+   
 
   useEffect(() => {
 
@@ -112,41 +131,62 @@ const ModernTemplateA = (props) => {
 
   const Blocks = () =>{
 
-      const model = { ...props.PdfDataModel.data };
+    const model = { ...props.PdfDataModel.data };
 
-      return {
-           Competances:(<View >{model.competance.length > 0 &&<Text style={styles.sideBartitle}>{locales("Compétances")}</Text> }
-                  <Competance PdfDataModel={props.PdfDataModel} /></View>),
-           Langue:(<View>{model.langue.length > 0 &&<Text style={styles.sideBartitle}>{locales("langues") }</Text> }
-                  <Language PdfDataModel={props.PdfDataModel} /></View>),
-           CentreInteret:(<View>{model.centreInteret.length > 0 &&<Text style={styles.sideBartitle}>{locales("Centres d'intérêts")}</Text>}
-                  <CentreInteret  PdfDataModel={props.PdfDataModel} /></View>),
-           Fromations:( <View style={styles.ExperienceWarp}>
-               { model.formation.length > 0 && <Text style={styles.titleSections}>  {locales("Formations")}: </Text> }
-               <Formation PdfDataModel={props.PdfDataModel} />
-           </View>),
-           ExperienceProfessionel:(<View style={styles.ExperienceWarp}>
-               { model.experienceProfessionel.length > 0 && <Text style={styles.titleSections}> {locales("Expériences professionnelles")} : </Text> }
-               <Experience  PdfDataModel={props.PdfDataModel} />
-           </View>),
-           Stage:( <View style={styles.ExperienceWarp}>
-               { model.Stages.length > 0 && <Text style={styles.titleSections}> {locales("Stages")} : </Text> }
-               <Stage PdfDataModel={props.PdfDataModel} />
-           </View>)
-         }
+    return {
 
-  }
+         Competances:(<View >{model.competance.length > 0 &&<Text style={getStyle(getPosition("Competances")).sideBartitle}>{locales("Compétances")}</Text> }
+            <Competance PdfDataModel={props.PdfDataModel} /></View>),
 
-  const GetBlocks = (block) => {
-     const order =  props.PdfDataModel.preference.order;
-     const flatblocks = Blocks()
-      let orderedBlocks = []
-       order[block].forEach((elm,key)=>{
-           orderedBlocks[elm.order] = flatblocks[elm.name];
-       })
 
-     return orderedBlocks;
-   }
+         Langue:(<View >{model.langue.length > 0 &&<Text style={getStyle(getPosition("Langue")).sideBartitle}>{locales("langues") }</Text>}
+            <Language  PdfDataModel={props.PdfDataModel} /></View>),
+
+
+
+        CentreInteret:(<View >{model.centreInteret.length > 0 &&<Text style={getStyle(getPosition("CentreInteret")).sideBartitle}>{locales("Centres d'intérêts")}</Text>}
+            <CentreInteret  PdfDataModel={props.PdfDataModel} /></View>),
+
+
+        Fromations:(<View style={getStyle(getPosition("Fromations")).ExperienceWarp}>
+            {model.formation.length > 0 && <Text style={getStyle(getPosition("Fromations")).titleSections}>  {locales("Formations")}: </Text>}
+            <Formation  PdfDataModel={props.PdfDataModel} />
+        </View>),
+
+
+        ExperienceProfessionel:(<View style={getStyle(getPosition("ExperienceProfessionel")).ExperienceWarp}>
+            {model.experienceProfessionel.length > 0 && <Text style={getStyle(getPosition("ExperienceProfessionel")).titleSections}> {locales("Expériences professionnelles")} : </Text>}
+            <Experience  PdfDataModel={props.PdfDataModel} />
+        </View>),
+
+
+        Stage:(<View style={getStyle(getPosition("Stage")).ExperienceWarp}>
+            {model.Stages.length > 0 && <Text style={getStyle(getPosition("Stage")).titleSections}> {locales("Stages")} : </Text>}
+            <Stage PdfDataModel={props.PdfDataModel} />
+        </View>)
+    }
+
+}
+
+const GetBlocks = (positon) => {
+
+    let blocks = ["bigBlok","Blok"];
+    let orderedBlocks = []
+    let orderShift = 0
+    blocks.forEach((block)=>{
+        const order =  props.PdfDataModel.preference.order;
+        const position =  props.PdfDataModel.preference.sectionPostion;
+        const flatblocks = Blocks()
+         order[block].forEach((elm,key)=>{
+             if(position[elm.name] == positon){
+               orderedBlocks[parseInt(elm.order)+orderShift] = flatblocks[elm.name];
+             }
+         })
+         orderShift += 3
+    })
+    return orderedBlocks;
+
+}
 
 
 
@@ -176,7 +216,7 @@ const ModernTemplateA = (props) => {
             <View style={styles.sideBarSection}>
 
               <PersonalInformation PdfDataModel={props.PdfDataModel} />
-                {GetBlocks("Blok")}
+                {GetBlocks("g")}
             </View>
 
           </View>
@@ -186,8 +226,8 @@ const ModernTemplateA = (props) => {
             <Text style={styles.nameWrap} > {getFullname(props)} </Text>
             <Text style={styles.descriptionWarp} >{getDescription(props)}</Text>
             <ProfileDescription PdfDataModel={props.PdfDataModel}   />
-              {GetBlocks("bigBlok")}
-              {GetBlocks("Blok")} 
+              {GetBlocks("d")}
+           
           </View>
 
         </Page>

@@ -35,7 +35,6 @@ const UserInformaion = (props) => {
         userService.getAllCvs().then((response) => {
             var datas = response.data.map((elm) => {
                 const pref = {...preference}
-                console.log("pref",pref)
                 let bindedObjectPref = Object.assign(pref , elm.preference  )
                 elm.preference = bindedObjectPref;
                 const datas = {...data}
@@ -132,7 +131,6 @@ const UserInformaion = (props) => {
         props.setModes(mode)
         if(Libelle.target?.value){
         userService.createUserCv(dataFixture, preferenceFixture, Libelle.target.value).then((reponse) => {
-            console.log('resp',reponse)
             let cv = reponse.data
             cv.data = JSON.parse(cv.data)
             cv.preference = JSON.parse(cv.preference)

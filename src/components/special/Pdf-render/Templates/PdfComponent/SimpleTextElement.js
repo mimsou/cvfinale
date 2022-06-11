@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {pdfStyles} from "./PdfStyles";
+import {pdfStyles , pdfStyles_d} from "./PdfStyles";
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 
 // Create styles
@@ -9,10 +9,15 @@ const SimpleTextelement = (props) => {
 
   let styles = {}
   if(props.style){
-    styles = StyleSheet.create(props.style);
+      styles = StyleSheet.create(props.style);
   }else{
-    styles = StyleSheet.create(pdfStyles(props));
+    if(props.position == "g"){
+      styles = StyleSheet.create(pdfStyles(props));
+    }else{
+      styles = StyleSheet.create(pdfStyles_d(props));
+    }  
   }
+
 
   const [PdfLibelle, setPdfLibelle] = useState("");
 

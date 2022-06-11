@@ -14,7 +14,7 @@ class AuthService {
         return response;
       },
       function (error) {
-        console.log(error)
+        
         if (401 === error?.response?.status) {
           localStorage.removeItem("user");
           window.location.replace("/auth/login");
@@ -41,7 +41,7 @@ class AuthService {
   
 
   getJwt() {
-    console.log("jwt",localStorage.getItem("user"))
+   
     if (localStorage.getItem("user")) {
       return localStorage.getItem("user");
     } else {
@@ -131,7 +131,6 @@ class AuthService {
 
   isAdmin () {
         let user = localStorage.getItem("user_info")
-        console.log(user)
     return true
   }
 }

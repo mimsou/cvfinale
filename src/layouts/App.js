@@ -36,7 +36,7 @@ const App = (props) => {
   }, [location]);
 
   useEffect(() => {
-    console.log("trigger")
+  
     if(Object.entries(CurrentCvs)!=0) history.push("/app/template");
   }, [CurrentCvs]);
   

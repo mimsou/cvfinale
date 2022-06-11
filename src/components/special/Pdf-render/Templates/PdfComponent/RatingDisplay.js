@@ -25,11 +25,11 @@ const RatingDisplay = (props) => {
   
   let styles = {}
   if(props.style){
-    styles = StyleSheet.create(props.style);
+      styles = StyleSheet.create(props.style);
   }else{
     if(props.position == "g"){
       styles = StyleSheet.create(pdfStyles(props));
-    }else if(props.position == "d"){
+    }else{
       styles = StyleSheet.create(pdfStyles_d(props));
     }  
   }

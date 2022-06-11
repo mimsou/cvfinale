@@ -19,7 +19,7 @@ import ProfileDescription from "./PdfComponent/sections/ProfileDescription";
 import Experience from "./PdfComponent/sections/Experience";
 import CentreInteret from "./PdfComponent/sections/CentreInteret";
 import Stage from "./PdfComponent/sections/Stage";
-import {pdfStyles} from "./PdfComponent/PdfStyles";
+import {pdfStyles , pdfStyles_d} from "./PdfComponent/PdfStyles";
 import {getFullname, getAvatarImage, getDescription} from "./PdfComponent/pdfContentHelper";
 import Formation from "./PdfComponent/sections/Formation";
 
@@ -30,10 +30,11 @@ const ClassicTemplate = (props) => {
     const colorC = (props.PdfDataModel.preference?.Palette?.ColorC != "undefined") ?  props.PdfDataModel.preference?.Palette?.ColorC : "#e9c46a"
     const colorB = (props.PdfDataModel.preference?.Palette?.ColorB != "undefined") ?  props.PdfDataModel.preference?.Palette?.ColorB : "#e9c46a"
 
-
-    let extendedStyle = pdfStyles(props)
-
-
+    const getPosition = (name) => {
+        return  props.PdfDataModel.preference.sectionPostion[name]
+    }
+    
+    const  extendStyle  = (extendedStyle,position) => {
 
     extendedStyle.page = {
         backgroundColor: "#FFFFFF",
@@ -85,34 +86,49 @@ const ClassicTemplate = (props) => {
         position:"relative",
         color:"#413d3d"
     }
-
-    extendedStyle.sideBartitle = {
-        color: "#413d3d",
-        fontSize: "14px",
-        fontWeigth:"bold",
-        marginBottom: "20px",
-        marginTop:"10px",
-        marginLeft: "-5px",
-        paddingTop:"12px",
-        paddingLeft:"20px",
-        opacity:"0.7",
-        borderLeft:"5px solid "+colorA,
-    }
-
-    extendedStyle.sideText = {
-        color: "#413d3d",
-        fontSize: "10px",
-        padding: "5px",
-        display:"flex",
-        flexDirection: "row",
-        width: "160px",
-    }
-
+    
+    if(position != "d"){
+       extendedStyle.sideBartitle = {
+           color: "#413d3d",
+           fontSize: "14px",
+           fontWeigth:"bold",
+           marginBottom: "20px",
+           marginTop:"10px",
+           marginLeft: "-5px",
+           paddingTop:"12px",
+           paddingLeft:"20px",
+           opacity:"0.7",
+           borderLeft:"5px solid "+colorA,
+       }
+   
+       extendedStyle.sideText = {
+           color: "#413d3d",
+           fontSize: "10px",
+           padding: "5px",
+           display:"flex",
+           flexDirection: "row",
+           width: "160px",
+       }
+  
     extendedStyle.Sidefill = {
         color: "#413d3d",
     }
 
-    const styles = StyleSheet.create(extendedStyle);
+   }
+
+    return StyleSheet.create(extendedStyle);
+
+  }
+
+  const getStyle = (position) => {
+    if(position=="g"){
+       return  extendStyle(pdfStyles(props),position) 
+    }else{
+        return  extendStyle(pdfStyles_d(props),position) 
+    }
+}
+
+  const styles  = getStyle("g")
 
     useEffect(() => {
 
@@ -148,41 +164,66 @@ const ClassicTemplate = (props) => {
     const model = { ...props.PdfDataModel.data };
 
 
-    const Blocks = () =>{
+    const Blocks = () => {
 
         const model = { ...props.PdfDataModel.data };
 
         return {
-            Competances:(<View>{model.competance.length > 0 &&<Text style={styles.sideBartitle}>{locales("Compétances")}</Text> }
-                <Competance style={styles} PdfDataModel={props.PdfDataModel} /></View>),
-            Langue:(<View>{model.langue.length > 0 &&<Text style={styles.sideBartitle}>{locales("langues") }</Text> }
-                <Language style={styles} PdfDataModel={props.PdfDataModel} /></View>),
-            CentreInteret:(<View>{model.centreInteret.length > 0 &&<Text style={styles.sideBartitle}>{locales("Centres d'intérêts")}</Text>}
-                <CentreInteret style={styles} PdfDataModel={props.PdfDataModel} /></View>),
-            Fromations:( <View style={styles.ExperienceWarp}>
-                { model.formation.length > 0 && <Text style={styles.titleSections}>  {locales("Formations")}: </Text> }
-                <Formation style={styles} PdfDataModel={props.PdfDataModel} />
+
+            Competances:(<View >{model.competance.length > 0 &&<Text style={getStyle(getPosition("Competances")).sideBartitle}>{locales("Compétances")}</Text> }
+                <Competance style={getStyle(getPosition("Competances"))} PdfDataModel={props.PdfDataModel} /></View>),
+
+
+             Langue:(<View >{model.langue.length > 0 &&<Text style={getStyle(getPosition("Langue")).sideBartitle}>{locales("langues") }</Text> }
+                <Language style={getStyle(getPosition("Langue"))} PdfDataModel={props.PdfDataModel} /></View>),
+
+
+
+            CentreInteret:(<View >{model.centreInteret.length > 0 &&<Text style={getStyle(getPosition("CentreInteret")).sideBartitle}>{locales("Centres d'intérêts")}</Text>}
+                <CentreInteret style={getStyle(getPosition("CentreInteret"))} PdfDataModel={props.PdfDataModel} /></View>),
+
+
+            Fromations:(<View style={getStyle(getPosition("Fromations")).ExperienceWarp}>
+                {model.formation.length > 0 && <Text style={getStyle(getPosition("Fromations")).titleSections}>  {locales("Formations")}: </Text> }
+                <Formation style={getStyle(getPosition("Fromations"))} PdfDataModel={props.PdfDataModel} />
             </View>),
-            ExperienceProfessionel:(<View style={styles.ExperienceWarp}>
-                { model.experienceProfessionel.length > 0 && <Text style={styles.titleSections}> {locales("Expériences professionnelles")} : </Text> }
-                <Experience style={styles}  PdfDataModel={props.PdfDataModel} />
+
+
+            ExperienceProfessionel:(<View style={getStyle(getPosition("ExperienceProfessionel")).ExperienceWarp}>
+                {model.experienceProfessionel.length > 0 &&<Text style={getStyle(getPosition("ExperienceProfessionel")).titleSections}> {locales("Expériences professionnelles")} : </Text> }
+                <Experience style={getStyle(getPosition("ExperienceProfessionel"))}  PdfDataModel={props.PdfDataModel} />
             </View>),
-            Stage:( <View style={styles.ExperienceWarp}>
-                { model.Stages.length > 0 && <Text style={styles.titleSections}> {locales("Stages")} : </Text> }
-                <Stage style={styles} PdfDataModel={props.PdfDataModel} />
+
+
+            Stage:(<View style={getStyle(getPosition("Stage")).ExperienceWarp}>
+                {model.Stages.length > 0 &&<Text style={getStyle(getPosition("Stage")).titleSections}> {locales("Stages")} : </Text>}
+                <Stage style={getStyle(getPosition("Stage"))} PdfDataModel={props.PdfDataModel} />
             </View>)
         }
 
     }
 
-    const GetBlocks = (block) => {
-        const order =  props.PdfDataModel.preference.order;
-        const flatblocks = Blocks()
+ 
+
+    const GetBlocks = (positon) => {
+
+        let blocks = ["bigBlok","Blok"];
         let orderedBlocks = []
-        order[block].forEach((elm,key)=>{
-            orderedBlocks[elm.order] = flatblocks[elm.name];
+        let orderShift = 0
+        blocks.forEach((block)=>{
+            const order =  props.PdfDataModel.preference.order;
+            const position =  props.PdfDataModel.preference.sectionPostion;
+            const flatblocks = Blocks()
+            console.log("flat",flatblocks);
+             order[block].forEach((elm,key)=>{
+                 if(position[elm.name] == positon){
+                   orderedBlocks[parseInt(elm.order)+orderShift] = flatblocks[elm.name];
+                 }
+             })
+             orderShift += 3
         })
         return orderedBlocks;
+    
     }
 
 
@@ -220,7 +261,7 @@ const ClassicTemplate = (props) => {
                             <View style={styles.sideBarSection}>
 
                                 <PersonalInformation style={styles} PdfDataModel={props.PdfDataModel} />
-                                {GetBlocks("Blok")}
+                                {GetBlocks("g")}
 
                             </View>
 
@@ -232,7 +273,7 @@ const ClassicTemplate = (props) => {
                                 <ProfileDescription PdfDataModel={props.PdfDataModel}/>
                             </View>
 
-                            {GetBlocks("bigBlok")}
+                            {GetBlocks("d")}
 
                         </View>
                   </View>

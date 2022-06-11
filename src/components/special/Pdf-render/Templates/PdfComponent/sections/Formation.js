@@ -6,13 +6,13 @@ import ExperiencesDisplay from "../ExperiencesDisplay";
 
 const Formation = (props) => {
 
-    const styles = StyleSheet.create(pdfStyles(props));
+    const style = props.style ? props.style : null;
     const model = { ...props.PdfDataModel.data };
     const position = props.PdfDataModel.preference.sectionPostion.Fromations
     if (typeof model.formation != "undefined") {
         return model.formation.map((vals, index) => {
             return (
-                <ExperiencesDisplay  position={position} key={index} dataModel={vals}>
+                <ExperiencesDisplay  style={style} position={position} key={index} dataModel={vals}>
                     {" "}
                 </ExperiencesDisplay>
             );

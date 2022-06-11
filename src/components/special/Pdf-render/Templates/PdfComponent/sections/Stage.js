@@ -5,14 +5,14 @@ import ExperiencesDisplay from "../ExperiencesDisplay";
 
 
 const Stage = (props) => {
-
-    const styles = StyleSheet.create(pdfStyles(props));
+ 
+    const style = props.style ? props.style : null;
     const model = { ...props.PdfDataModel.data };
     const position = props.PdfDataModel.preference.sectionPostion.Stage
     if (typeof model.Stages != "undefined") {
         return model.Stages.map((vals, index) => {
             return (
-                <ExperiencesDisplay    position={position} key={index} dataModel={vals}>
+                <ExperiencesDisplay  style={style}  position={position} key={index} dataModel={vals}>
                     {" "}
                 </ExperiencesDisplay>
             );

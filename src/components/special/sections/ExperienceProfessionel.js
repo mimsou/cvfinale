@@ -26,6 +26,7 @@ import { Accordion } from "@mui/material";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import PositionWidget from "../Helper-component/PositionWidget";
 
 const ExperienceProfessionel = (props) => {
   const jsonCopy = (src) => {
@@ -206,8 +207,12 @@ const ExperienceProfessionel = (props) => {
       <Accordion flush expanded={!Collapsed} onChange={(e,expanded)=>setCollapsed(!expanded)} style={style.bgItem}>
         
         <AccordionSummary expandIcon={<ExpandMoreIcon />} className="SectionHeading" >
+            
+        <DashCircle className="remove_section_cione" onClick={(e)=>{e.stopPropagation() ;props.removeSection(props.name);}}  />
 
-           <L>Expériences</L>  <DashCircle className="remove_section_cione" onClick={(e)=>{e.stopPropagation() ;props.removeSection(props.name);}}  />
+<PositionWidget className="position_widget_bloc" position={props.position}  setSectionPostion={(pos)=>{props.setSectionPosition(props.name,pos)}} />
+
+            <L>Expériences</L>  
 
         </AccordionSummary>
         {!Collapsed && (

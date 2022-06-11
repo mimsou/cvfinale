@@ -39,10 +39,7 @@ const Templating = (props) => {
     const [FullScreen, setFullScreen] = useState(false);
     const [activeSection, setActiveSection] = useState("ProfilePersonel");
     const [cvzoom, setCvzoom] = useState(1);
-
-    console.log("my mode",props.mode)
-
-
+ 
     const toggle = () => {
         setToggleDispay(!toggleDisplay)
     }
@@ -233,13 +230,17 @@ const Templating = (props) => {
          updateCv(CopyCv);
     }
 
+    const setSectionPosition = (name,pos) => {
+        let CopyCv = {...Cv}
+        CopyCv.preference.sectionPostion[name] = pos;
+        updateCv(CopyCv);
+    }
+
     const getForms = (sections) => {
 
         sections = sortSections(sections)
 
         let showSections = getActiveSection()
-
-        console.log("active sec",activeSection)
 
         return sections.map((section, keys) => {
             if (section.active == true) {
@@ -253,9 +254,13 @@ const Templating = (props) => {
                             index: keys,
                             key: keys,
                             name: section.name,
+                            position: Cv?.preference?.sectionPostion[section.name],
                             inputDataModel: Cv.data,
                             active:activeSection,
                             show:showSections[section.name],
+                            setSectionPosition:(name,pos)=>{
+                                setSectionPosition(name,pos)
+                            },
                             removeSection:(name)=>{
                                 setActivationForSection(name,false)
                             },

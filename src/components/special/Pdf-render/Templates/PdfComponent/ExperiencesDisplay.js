@@ -1,51 +1,115 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 
+
+
+
+
 // Create styles
-const styles = StyleSheet.create({
-  maincontainer: {
-    paddingTop:"10px",
-    paddingBottom:"10px",
-    width: "320px",
-  },
-  boldText: {
-    fontWeight: "bold",
-    fontSize: "11px",
-  },
-  normalText: {
-    fontWeight: "normal",
-    fontSize: "10px",
-  },
-  container: {
-    display: "flex",
-    flexDirection: "row",
-    width: "100px",
-  },
-  head: {
-    display: "flex",
-    justifyContent: "space-between",
-    flexDirection: "row",
-  },
-  headChild: {
-    display: "inline-block",
-    width:"65%"
-  },
-  periodChild: {
-    display: "inline-block",
-    textAlign:"right",
-    width:"35%"
-  },
-  middle: {
-    marginTop:"5px",
-    width: "100%",
-  },
-  body: {
-    marginTop:"5px",
-    marginBottom:"5px",
-},
-});
+
 
 const ExperiencesDisplay = (props) => {
+
+
+  let styles = {}
+
+  let corlors = "#FFFFFF";
+
+  if(props?.style?.sideText){
+    corlors = props?.style?.sideText?.color
+  }
+
+  if(props.position == "g"){
+
+    styles = StyleSheet.create({
+      maincontainer: {
+        paddingTop:"10px",
+        paddingBottom:"10px",
+        width: "320px",
+      },
+      boldText: {
+        fontWeight: "bold",
+        fontSize: "11px",
+        color:corlors
+      },
+      normalText: {
+        fontWeight: "normal",
+        fontSize: "10px",
+        color:corlors
+      },
+      container: {
+        display: "flex",
+        flexDirection: "row",
+        width: "100px",
+      },
+      head: {
+        display: "flex",
+        justifyContent: "space-between",
+        flexDirection: "column",
+      },
+      headChild: {
+         width:"200px"
+      },
+      periodChild: {
+        width:"200px"
+      },
+      middle: {
+        marginTop:"5px",
+        width: "100%",
+      },
+      body: {
+        marginTop:"5px",
+        marginBottom:"5px",
+        width:"200px"
+      },
+    });
+
+  }else{
+
+    styles = StyleSheet.create({
+      maincontainer: {
+        paddingTop:"10px",
+        paddingBottom:"10px",
+        width: "320px",
+      },
+      boldText: {
+        fontWeight: "bold",
+        fontSize: "11px",
+      },
+      normalText: {
+        fontWeight: "normal",
+        fontSize: "10px",
+      },
+      container: {
+        display: "flex",
+        flexDirection: "row",
+        width: "100px",
+      },
+      head: {
+        display: "flex",
+        justifyContent: "space-between",
+        flexDirection: "row",
+      },
+      headChild: {
+        display: "inline-block",
+        width:"65%"
+      },
+      periodChild: {
+        display: "inline-block",
+        textAlign:"right",
+        width:"35%"
+      },
+      middle: {
+        marginTop:"5px",
+        width: "100%",
+      },
+      body: {
+        marginTop:"5px",
+        marginBottom:"5px",
+      },
+    });
+    
+  }  
 
   const [PdfDataModel, setPdfDataModel] = useState(0);
 
@@ -126,8 +190,7 @@ const ExperiencesDisplay = (props) => {
     const model = { ...PdfDataModel };
 
     let lieux = "";
-
-    console.log("mymodal",model)
+ 
 
     if (typeof model.employeur != "undefined") {
 
