@@ -1,36 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@1,800&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@500&display=swap');
+
 .brand{
-    position: absolute;
-    top: 12px;
-    padding-right: 20px;
-    padding-left: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    padding: 0px;
-    padding-left: 26px;
-    padding-right: 30px;
-    background-color: #FFFFFF;
-    box-shadow: rgb(50 50 93 / 25%) 0px 6px 12px -2px, rgb(0 0 0 / 30%) 0px 3px 7px -3px;
-    border-left: 54px solid #0b2b3f;
-    z-index:9999;
+   z-index:9999;
+}
+
+.logo-img{
+    width: 150px;
+    margin-left: 10px;
 }
 
 h1 {
-    position: absolute;
-    font-size: 2vw;
-    color: #213f52;
-    font-family: system-ui;
-    left: 417px;
-    top: 17vh;
-    font-weight: bolder;
-    width: 33vw;
-  }
+ font-size: 2em;
+}
 
   .lang-selection {
-    right: 10px;
-    top: calc(9vh - 91px);
-    position: absolute;
-    zoom: 2;
+   
   }
 
 .upper_block{
@@ -63,32 +49,53 @@ h1 {
     position: relative;
 }
 
+.landing_header_nav{
+      margin-top: 50px;
+      margin-right: auto;
+}
+
+.landing_header_nav a{
+    text-decoration: none;
+    font-size: 18px !important;
+    color:#2e3031;
+    margin: 0px 40px;
+    padding: 40px;
+}
+
+.landing_header_nav a:hover{
+   color:#0b2b3f;
+   border-bottom: 1px solid #2e3031;
+}
+
+.landing_header_nav a:active{
+    text-decoration: none;
+    font-size: 18px !important;
+}
+
 .creation_cv {
+    margin:auto;
     border: 7px solid #ebf2f6;
     overflow: hidden;
     width: 48.5vh;
     height: 70vh;
-    position: absolute;
     background-color: #ffffff;
-    left: 66vw;
-    top: calc(20vh);
     border-radius: 20px;
     image-rendering: crisp-edges;
     box-shadow: 0.5px 0.5px 1px rgb(0 0 0 / 2%), 1px 0.9px 2.1px rgb(0 0 0 / 2%), 1.6px 1.5px 3.6px rgb(0 0 0 / 2%), 2.4px 2.3px 5.7px rgb(0 0 0 / 2%), 3.7px 3.5px 9.1px rgb(0 0 0 / 2%), 6.3px 6px 15.6px rgb(0 0 0 / 3%), 20px 19px 46px rgb(0 0 0 / 5%);
 }
 
 .cv_link{
+    height: 74px;
+    display: inline-block;
     text-decoration: none;
     color: #e0eff3;
-    left: 411px;
-    top: 28vh;
     z-index: 999999999;
-    position: absolute;
+    margin: 10px;
     background-color: #00aeef;
     font-family: 'Montserrat Alternates', sans-serif;
     border-radius: 25px;
-    padding: 2vh;
-    font-size: 2vw;
+    padding: 20px;
+    font-size: 20px;
     transition: all 0.6s cubic-bezier(.47,1.64,.41,.8);
     box-shadow: 0.5px 0.5px 1px rgb(0 0 0 / 2%), 1px 0.9px 2.1px rgb(0 0 0 / 2%), 1.6px 1.5px 3.6px rgb(0 0 0 / 2%), 2.4px 2.3px 5.7px rgb(0 0 0 / 2%), 3.7px 3.5px 9.1px rgb(0 0 0 / 2%), 6.3px 6px 15.6px rgb(0 0 0 / 3%), 20px 19px 46px rgb(0 0 0 / 5%);
 }
@@ -98,26 +105,28 @@ h1 {
 }
 
 .cv_link:hover{
-    font-size: 2.2vw;
+    font-size: 20px;
     color: #ffffff;
     text-decoration: none;
+    margin-top: -5px;
 }
 
 
 .upper_text {
+    z-index: -1;
     position: absolute;
-    font-size: 120px;
-    color: #dce4e9;
+    font-size: 100px;
+    color: #ffffff;
     font-family: system-ui;
     font-weight: bolder;
-    top: -380px;
+    top: -315px;
     width: max-content;
     transform: rotate(90deg);
-    padding-left: 600px;
-    margin-top: -272px;
+    padding-left: 592px;
+    margin-top: -273px;
     transform-origin: bottom left;
-    border-bottom: 53px solid #dce4e9;
 }
+
 
 .bottom_text{
     position: absolute;
@@ -130,12 +139,10 @@ h1 {
 }
 
 .cv_description {
-    position: absolute;
-    font-size: 2vh;
+    font-size: 22px;
     top: 22em;
     left: 417px;
-    width: 30vw;
-    text-align: justify;
+    text-align: center;
 }
 
 @media (max-width: 991.98px){
@@ -144,46 +151,124 @@ h1 {
       display: none;
     }
 
-    .cv_description {
-        position: absolute;
-        top: 50vh;
-        left: 0px;
-        width: 95vw;
-        margin: 10px;
-    }
-
   
-
-    .cv_link {
-        text-decoration: none;
-        color: #e0eff3;
-        left: 80px;
-        top: 35vh;
-        z-index: 999999999;
-        position: absolute;
-        background-color: #00aeef;
-        font-family: 'Montserrat Alternates', sans-serif;
-        border-radius: 25px;
-        padding: 2vh;
-        font-size: 28px;
-        transition: all 0.6s cubic-bezier(.47,1.64,.41,.8);
-        box-shadow: 0.5px 0.5px 1px rgb(0 0 0 / 2%), 1px 0.9px 2.1px rgb(0 0 0 / 2%), 1.6px 1.5px 3.6px rgb(0 0 0 / 2%), 2.4px 2.3px 5.7px rgb(0 0 0 / 2%), 3.7px 3.5px 9.1px rgb(0 0 0 / 2%), 6.3px 6px 15.6px rgb(0 0 0 / 3%), 20px 19px 46px rgb(0 0 0 / 5%);
-    }
-
     .cv_link:hover{
-        font-size: 29px;
+        font-size: 20px;
         color: #ffffff;
         text-decoration: none;
+        margin-top: -5px;
     }
  
-    h1 {
-        position: absolute;
-        font-size: 28px;
-        color: #213f52;
-        font-family: system-ui;
-        left: 5px;
-        top: 21.5vh;
-        font-weight: bolder;
-        width: 100vw;
-      }
+   
 }
+
+
+.cv-steps:not(:first-child)::after{
+
+}
+
+.h1_warpe{
+    font-size: 24px;
+}
+
+.step_number{
+    display: inline-block;
+    position: relative;
+    z-index: 99999;
+    left: 83px;
+    color: #fff;
+    top: 30px;
+    font-size: 54px;
+}
+
+
+.step_icone{
+    display: inline-block;
+    position: relative;
+    z-index: 99999;
+    left: 71px;
+    color: #fff;
+    top: -13px;
+    font-size: 100px;
+}
+
+
+
+.landing-main{
+    margin-bottom: 80px;
+}
+
+.cv-steps{
+    margin: 15px;
+    height: 200px;
+}
+
+.step_description_icone{
+    display: inline-block;
+    position: relative;
+    z-index: 99999;
+    left: -13px;
+    color: #fff;
+    top: 24px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    width: 118px;
+}
+
+.step_description{
+    display: inline-block;
+    position: relative;
+    z-index: 99999;
+    left: 11px;
+    color: #fff;
+    top: 98px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    width: 118px;
+}
+
+/* Circle */
+
+.circle{
+    width: 200px;
+    background-color: #00aeef;
+    border-radius: 50%;
+    height: 200px;
+    top: -159px;
+    position: relative;
+}
+
+
+/* hexagone */
+
+
+.hexagon {
+    top: -90px;
+    position: relative;
+    width: 200px; 
+    height: 115.47px;
+    background-color: #00aeef;
+    margin: 57.74px 0;
+  }
+  
+  .hexagon:before,
+  .hexagon:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+  }
+  
+  .hexagon:before {
+    bottom: 100%;
+    border-bottom: 57.74px solid #00aeef;
+  }
+  
+  .hexagon:after {
+    top: 100%;
+    width: 0;
+    border-top: 57.74px solid #00aeef;
+  }

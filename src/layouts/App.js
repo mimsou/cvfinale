@@ -14,6 +14,7 @@ import ProfilingQuestion from "../components/special/ProfilingQuestion";
 import AuthService from "../services/auth.service";
 import UserService from "../services/user.service";
 import routes from "routes.js";
+import AuthFooter from "components/Footers/AuthFooter.js";
 import { useDispatch } from "react-redux";
 
 const App = (props) => {
@@ -130,6 +131,7 @@ const App = (props) => {
             </Switch>
           </Container>
         )}
+         <AuthFooter />
       </div>
     </>
   );

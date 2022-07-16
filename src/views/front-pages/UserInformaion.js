@@ -11,7 +11,10 @@ import {
     ModalHeader,
     ModalBody,
     ModalFooter,
-    Input
+    Input,
+    Popover,
+    PopoverHeader,
+    PopoverBody
 } from "reactstrap";
 import CvsThumbnail from "components/special/CvsThumbnail";
 import {Add} from "@mui/icons-material";
@@ -156,23 +159,18 @@ const UserInformaion = (props) => {
                 <Row>
                     <Col md="12">
                         <div
-                            style={{
-                                width: "100%",
-                                display: "flex",
-                                justifyContent: "flex-start",
-                                flexWrap: "wrap"
-                            }}
+                           className="main_container"
                         >
-                            {getCvsThumbnail()}
 
-                            <div className="ButtonContainer">
+                           <div className="ButtonContainer">
                                 <div
-                                    onClick={() => {
-                                        newLibelle();
-                                    }}
+                                    id="addCv"
+                                     onClick={() => {
+                                         newLibelle();
+                                     }}
                                     className="addCvButton Thumnailcontainer"
                                 >
-                                    <Add
+                                   <Add
                                         stroke={"#006eb7"}
                                         fill={"red"}
                                         height={55}
@@ -180,36 +178,54 @@ const UserInformaion = (props) => {
                                         className="icone-center"
                                     />
                                 </div>
+
+                                <Popover
+                                 flip
+                                 target="addCv"
+                                 trigger="hover"
+                                 toggle={function noRefCheck(){}}
+                               >
+                                 <PopoverHeader>
+                                  Ajouter un cv
+                                 </PopoverHeader>
+                                 <PopoverBody>sdqdqsd</PopoverBody>
+                               </Popover>
                             </div>
+
+                            {getCvsThumbnail()}
+
+                           
                         </div>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
 
+                    
+
                          <Modal size="xl"  id={"createCv"} centered={true} isOpen={modal} toggle={toggle} className={"createCv"}>
-                            <ModalHeader toggle={toggle}>Nouveau CV</ModalHeader>
+                            <ModalHeader toggle={toggle}><L>Nouveau CV</L></ModalHeader>
                             <ModalBody>
                                 <Row>
                                     <Col>
                                          
                                     </Col>
                                 </Row>
-                                Titre : <Input className="cv_new_title" onChange={(e) => setLibelle(e)}/>
+                                <L>Titre</L> : <Input className="cv_new_title" onChange={(e) => setLibelle(e)}/>
                             </ModalBody>
                             <ModalFooter>
                                 <Button  outline className="selection_button" color="secondary" onClick={() => {
                                     toggle();
                                     newCv("et")
                                 }}>
-                                   Créer un cv pour un étudiant
+                                   <L>Créer un cv pour un étudiant</L>
                                 </Button>{" "}
 
                                 <Button  outline className="selection_button" color="secondary" onClick={() => {
                                     toggle();
                                     newCv("pe")
                                 }}>
-                                   Créer un cv pour premier emploi
+                                   <L>Créer un cv pour premier emploi</L>
                                 </Button>{" "}
 
 
@@ -217,7 +233,7 @@ const UserInformaion = (props) => {
                                     toggle();
                                     newCv("pf")
                                 }}>
-                                   Créer un cv pour proffessionel avec expérience
+                                    <L>Créer un cv pour proffessionel avec expérience</L>
                                 </Button>{" "}
 
                              

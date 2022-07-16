@@ -15,6 +15,7 @@ const Auth = (props) => {
   const location = useLocation();
 
   React.useEffect(() => {
+  
     document.body.classList.add("body-bg");
     return () => {
       document.body.classList.remove("bg-default");
@@ -32,7 +33,7 @@ const Auth = (props) => {
       if (prop.layout === "/auth" && !AuthService.isLoggedIn()) {
         return (
           <Route
-            path={prop.layout + prop.path}
+            path={prop.layout + prop.path+"/:lang?"}
             component={prop.component}
             key={key}
           />
