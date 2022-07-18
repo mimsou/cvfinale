@@ -148,6 +148,8 @@ const UserInformaion = (props) => {
         return <Slide direction="up" ref={ref} {...props} />;
       });
 
+      console.log("allcv",AllMyCvs.length)
+
     return (
         <>
             <Container fluid>
@@ -163,7 +165,7 @@ const UserInformaion = (props) => {
                         >
 
                            <div className="ButtonContainer">
-                                <div
+                              { AllMyCvs.length < 3 && <div
                                     id="addCv"
                                      onClick={() => {
                                          newLibelle();
@@ -177,7 +179,7 @@ const UserInformaion = (props) => {
                                         width={55}
                                         className="icone-center"
                                     />
-                                </div>
+                                </div> }
 
                                 <Popover
                                  flip

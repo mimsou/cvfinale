@@ -25,6 +25,11 @@ background: linear-gradient(90deg, rgba(235,242,246,1) 0%, rgba(194,218,232,1) 1
   overflow: hidden;
 }
 
+.fixed-footer{
+  position: fixed;
+  bottom: 0px;
+}
+
 .blur {
   filter: blur(10px);
   -webkit-filter: blur(10px);
@@ -675,6 +680,7 @@ section {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
+  overflow: auto;
 }
 
 .mouse-over-thumb{
@@ -907,6 +913,7 @@ section {
 .trash_mobile{
   display: none;
 }
+
 footer{
   position: relative;
   width: 100%;

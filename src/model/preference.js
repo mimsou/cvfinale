@@ -1,6 +1,6 @@
 const preference = {
     "Template": {
-        "id": 1,
+        "id": 2,
         "name": "Classic Style",
         "active": false,
         "tamplate": {"key": null, "ref": null, "props": [], "_owner": null, "_store": []},

@@ -8,7 +8,12 @@ import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import AuthFooter from "components/Footers/AuthFooter.js";
 import AuthService from "../services/auth.service"
 
+
 import routes from "routes.js";
+
+import ReactGA from 'react-ga';
+const TRACKING_ID = "G-72HD2DDGEN";
+ReactGA.initialize(TRACKING_ID);
 
 const Auth = (props) => {
   const mainContent = React.useRef(null);
@@ -21,6 +26,12 @@ const Auth = (props) => {
       document.body.classList.remove("bg-default");
     };
   }, []);
+
+  React.useEffect(() => {
+    console.log("analytics" + window.location.pathname + window.location.search)
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+
   
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -59,7 +70,7 @@ const Auth = (props) => {
           </Row>
         </Container>
       </div>
-      <AuthFooter />
+      <AuthFooter cls="fixed-footer" />
     </>
   );
 };

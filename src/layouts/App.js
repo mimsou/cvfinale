@@ -16,6 +16,9 @@ import UserService from "../services/user.service";
 import routes from "routes.js";
 import AuthFooter from "components/Footers/AuthFooter.js";
 import { useDispatch } from "react-redux";
+import ReactGA from 'react-ga';
+const TRACKING_ID = "G-72HD2DDGEN";
+ReactGA.initialize(TRACKING_ID);
 
 const App = (props) => {
 
@@ -35,6 +38,11 @@ const App = (props) => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
   }, [location]);
+
+  useEffect(() => {
+    console.log("analytics" + window.location.pathname + window.location.search)
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
 
   useEffect(() => {
   
@@ -131,7 +139,7 @@ const App = (props) => {
             </Switch>
           </Container>
         )}
-         <AuthFooter />
+         <AuthFooter cls="fixed-footer" />
       </div>
     </>
   );

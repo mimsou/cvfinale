@@ -3,10 +3,10 @@ import React from "react";
 // reactstrap components
 import { NavItem, NavLink, Nav, Container, Row, Col } from "reactstrap";
 
-const Login = () => {
+const Login = (props) => {
   return (
     <>
-      <footer >
+      <footer className={props.cls}>
         <Container>
           <Row className="align-items-center justify-content-xl-between">
             <Col xl="6">

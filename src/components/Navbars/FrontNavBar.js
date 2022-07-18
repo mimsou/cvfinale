@@ -1,14 +1,11 @@
-import React, {useContext, useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import AuthService from "../../services/auth.service";
-import {
-  useLocation,
-  useHistory
-} from "react-router-dom";
-import {  Person,Flag } from "@mui/icons-material";
+import { useLocation, useHistory } from "react-router-dom";
+import { Person, Flag } from "@mui/icons-material";
 import { Avatar, Menu, MenuItem } from "@mui/material";
-import { Navbar, NavbarBrand } from "reactstrap";
+import { Nav, Navbar, NavbarBrand, NavbarToggler, NavItem , Collapse} from "reactstrap";
 import L from "../../locale";
-import {LanguageContext} from "../../localeContext";
+import { LanguageContext } from "../../localeContext";
 import LangPicker from "../special/Helper-component/LangPicker";
 
 const FrontNavBar = (props) => {
@@ -16,17 +13,20 @@ const FrontNavBar = (props) => {
   const location = useLocation();
   const history = useHistory();
   const [lang, setLang] = useContext(LanguageContext);
+  const [collapsed, setCollapsed] = React.useState(true);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const openUserMenu  = Boolean(anchorEl);
+  const openUserMenu = Boolean(anchorEl);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = (action) => {
-    switch (action){
-       case "logout":logout();break;
+    switch (action) {
+      case "logout":
+        logout();
+        break;
     }
     setAnchorEl(null);
   };
@@ -74,9 +74,7 @@ const FrontNavBar = (props) => {
 
   return (
     <>
-      <Navbar color="light" light  >
-
-
+      <Navbar color="light" light expand="md">
         <NavbarBrand href="/">
           <img
             className="ml-1  cviotek-logo"
@@ -84,52 +82,78 @@ const FrontNavBar = (props) => {
             src={require("../../assets/img/brand/logo.png").default}
           />
         </NavbarBrand>
-        
-         
-            <div className="StepItemContainer">
-              <div
-                onClick={() => {
-                  handleStepClick(1);
-                }}
-                className={getClass(1)}
-              >
-                <Person />
 
+        <NavbarToggler
+          onClick={() => {
+            setCollapsed(!collapsed);
+          }}
+        />
+        <Collapse isOpen={!collapsed} navbar>
+          <Nav className="mr-auto ml-2" navbar>
+            <NavItem>
+              <div className="StepItemContainer">
+                <div
+                  onClick={() => {
+                    handleStepClick(1);
+                  }}
+                  className={getClass(1)}
+                >
+                  <Person />
+                </div>
+                <div className="stepTitle">
+                  {" "}
+                  <L> Mes CVs </L>{" "}
+                </div>
               </div>
-              <div className="stepTitle"> <L> Mes CVs </L> </div>
-            </div>
+            </NavItem>
+            <NavItem>
+              <div className="StepItemContainer">
+                <div
+                  onClick={() => {
+                    //handleStepClick(2);
+                  }}
+                  className={getClass(2)}
+                >
+                  <Flag />
+                </div>{" "}
+                <div className="stepTitle">
+                  {" "}
+                  <L> Création </L>{" "}
+                </div>
+              </div>
+            </NavItem>
+            </Nav>
+            <Nav className="ml-auto ml-2" navbar>
+            <NavItem>
+              <div className="StepItemContainer">
+                <LangPicker setLanguage={(lang) => setLang(lang)} />
+              </div>
+            </NavItem>
 
-            <div className="StepItemContainer">
-              <div
-                onClick={() => {
-                  //handleStepClick(2);
+            <NavItem>
+              <Avatar
+                onClick={handleClick}
+                style={{margin:"10px 20px"}}
+                name="Souheyeb"
+                className="mr-1"
+              />
+
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={openUserMenu}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
                 }}
-                className={getClass(2)}
               >
-                <Flag />
-              </div>{" "}
-              <div className="stepTitle"> <L> Création </L> </div>
-            </div>
-
-        <div className="StepItemContainer">
-          <LangPicker  setLanguage={(lang)=>setLang(lang)} />
-        </div>
-        
-       
-        <Avatar  onClick={handleClick} style={{alignSelf:"flex-end",position:"relative",top:"-15px"}} name="Souheyeb" className="mr-1"  />
-
-        <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={openUserMenu}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <MenuItem onClick={()=>handleClose("logout")}>Logout</MenuItem>
-      </Menu>
-
+                <MenuItem onClick={() => handleClose("logout")}>
+                  Logout
+                </MenuItem>
+              </Menu>
+            </NavItem>
+          </Nav>
+        </Collapse>
       </Navbar>
     </>
   );

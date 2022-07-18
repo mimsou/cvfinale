@@ -14,7 +14,7 @@ import GoogleFontLoader from "react-google-font-loader";
 import { LanguageContext } from "./localeContext";
 import Landing from "./views/public-pages/Landing";
 import ReactGA from 'react-ga';
-const TRACKING_ID = "323256753";
+const TRACKING_ID = "G-72HD2DDGEN";
 ReactGA.initialize(TRACKING_ID);
 
 const Main = (props) => {
@@ -22,9 +22,10 @@ const Main = (props) => {
   const [lang, setLang] = useState("fr");
 
   useEffect(() => {
+    console.log("analytics" + window.location.pathname + window.location.search)
     ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
-  
+
   return (
     <>
       <GoogleFontLoader

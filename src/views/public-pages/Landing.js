@@ -160,7 +160,7 @@ const Landing = (props) => {
            
             <div className="col-md-8 offset-md-2">
             <Fade top cascade>
-              <div className="d-flex justify-content-between flex-wrap">
+              <div className="d-flex justify-content-around flex-wrap">
                 <div className="cv-steps ">
                   <div className="step_number"> 1 </div>
                   <div className="step_description">
@@ -234,7 +234,7 @@ const Landing = (props) => {
                   </div>
                   <div className="step_description_icone">
                     {" "}
-                    <L>Trop Simple</L>{" "}
+                    <L>Simple</L>{" "}
                   </div>
                   <div className="circle">
                     <span></span>
@@ -339,7 +339,7 @@ const Landing = (props) => {
                   }}
                   href={"/auth/login/" + lang}
                 >
-                  <L> Vous avez de l'expérience </L>
+                  <L> Avec expérience </L>
                 </a>
               </div>
             </div>
