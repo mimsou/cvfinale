@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect ,useHistory } from "react-router-dom";
 import { Provider } from "react-redux";
 import Store from "./configureStore.js";
 import "assets/plugins/nucleo/css/nucleo.css";
@@ -13,21 +13,52 @@ import Loader from "./Loader";
 import GoogleFontLoader from "react-google-font-loader";
 import { LanguageContext } from "./localeContext";
 import Landing from "./views/public-pages/Landing";
-import ReactGA from 'react-ga';
-const TRACKING_ID = "G-72HD2DDGEN";
-ReactGA.initialize(TRACKING_ID);
+import {Helmet} from "react-helmet";
+
 
 const Main = (props) => {
 
   const [lang, setLang] = useState("fr");
 
   useEffect(() => {
-    console.log("analytics" + window.location.pathname + window.location.search)
-    ReactGA.pageview(window.location.pathname + window.location.search);
+
+
+    /*  fetchJsFromCDN('https://www.ezojs.com/ezoic/sa.min.js', ['ezstandalone']).then(([ezstandalone]) => {
+     ezstandalone.define(131);
+      if (!ezstandalone.enabled) {
+        ezstandalone.enable();
+        ezstandalone.display();
+      }
+      else {
+        ezstandalone.refresh();
+      }
+    }) 
+ */
   }, []);
+
+
+
+  const fetchJsFromCDN = (src, externals = []) => {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.setAttribute('src', src)
+      script.addEventListener('load', () => {
+        resolve(externals.map(key => {
+          const ext = window[key]
+          typeof ext === 'undefined' && console.warn(`No external named '${key}' in window`)
+          return ext
+        }))
+      })
+      script.addEventListener('error', reject)
+      document.body.appendChild(script)
+    })
+  }
 
   return (
     <>
+      {/* <Helmet>
+       <script src="http://www.ezojs.com/ezoic/sa.min.js" type="text/javascript" />
+     </Helmet> */}
       <GoogleFontLoader
         fonts={[
           {
@@ -70,6 +101,7 @@ const Main = (props) => {
           </BrowserRouter>
         </Provider>
       </LanguageContext.Provider>
+     
     </>
   );
 };

@@ -8,7 +8,6 @@ import { AlignEnd, AlignStart } from "react-bootstrap-icons";
 const PositionWidget = (props) => {
   
     const getPropsPositionState = () => {
-        console.log("pos",props.position)
         if(props.position){
             return props.position;
          }

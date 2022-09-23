@@ -17,7 +17,7 @@ class AuthService {
         
         if (401 === error?.response?.status) {
           localStorage.removeItem("user");
-          window.location.replace("/auth/login");
+          //window.location.replace("/auth/login");
         } else { 
           return Promise.reject(error);
         }
@@ -37,6 +37,8 @@ class AuthService {
       return false;
     }
   }
+
+  
 
   
 
@@ -85,9 +87,11 @@ class AuthService {
       });
   }
 
-  logout() {
+  logout(redirect=true) {
     localStorage.removeItem("user");
-    window.location.replace("/auth/login");
+    if(redirect){
+      window.location.replace("/auth/login");
+    }
   }
 
   loginWithGoogle(token) {
@@ -126,7 +130,42 @@ class AuthService {
 
   }
 
-  getCurrentUser() {}
+
+  resetMail(email) {
+    
+    const user = {
+      email: email
+    };
+
+    return axios.post(API_URL + "auth/resetmail", user);
+
+  }
+
+
+  verifyToken(token) {
+    
+    const user = {
+      token: token
+    };
+
+    return axios.post(API_URL + "auth/verifytoken", user);
+
+  }
+
+  setPassword(password,info) {
+    
+    const user = {
+      password: password,
+      info:info.data
+    };
+
+    return axios.post(API_URL + "auth/setpassword", user);
+
+  }
+
+  getCurrentUser() { 
+    return localStorage.getItem("user_info")
+  }
 
 
   isAdmin () {

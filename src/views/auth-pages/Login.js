@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState , useEffect} from "react";
 
 import AuthService from "../../services/auth.service";
 
 import { useInput } from "hooks/inputHook";
 
-import { useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 
 import FacebookLogin from "react-facebook-login";
 
@@ -27,14 +27,18 @@ import {
   InputGroup,
   Row,
   Col,
+  NavItem,
+  Nav,
+  NavLink
 } from "reactstrap";
 import { LanguageContext } from "localeContext";
+import { usePageTracking } from "hooks/usePageTracking";
 
 const Login = (props) => {
 
+  let Tracker = usePageTracking();
 
   const responseFacebook = (response) => {
-
     this.signup(response, "facebook");
   };
 
@@ -42,6 +46,7 @@ const Login = (props) => {
     if (googleResponse.type !== "error") {
       AuthService.loginWithGoogle(googleResponse.accessToken).then(
             (reponse) => {
+              window.gtag("event", "Enregistrement et login avec google"); 
               if (AuthService.isLoggedIn()) {
                 AuthService.getUserProfile().then((resp)=>{
                   localStorage.setItem("user_info", JSON.stringify(resp.data));
@@ -50,7 +55,6 @@ const Login = (props) => {
               }
             }
       );
-
     }
   };
 
@@ -59,6 +63,12 @@ const Login = (props) => {
   const getToRegistration = () => {
     history.push("/auth/registration");
   };
+
+  const getToReset = () => {
+    history.push("/auth/paswordreset");
+  };
+
+  
 
   const { value: login, bind: bindLogin, reset: resetLogin } = useInput("");
   const {
@@ -72,10 +82,15 @@ const Login = (props) => {
     AuthService.login(login, password).then(
       () => {
         if (AuthService.isLoggedIn()) {
+            window.gtag("event", "Login"); 
+            AuthService.getUserProfile().then((resp)=>{
+              localStorage.setItem("user_info", JSON.stringify(resp.data));
+            })
             props.history.push("/app/user-information");
           }
       },
       (error) => {
+        window.gtag("event", "Erreur login"); 
         const resMessage =
           (error.response &&
             error.response.data &&
@@ -138,13 +153,57 @@ const Login = (props) => {
                   />
                 </InputGroup>
               </FormGroup>
-              
+              <Col className="text-right" xs="12">
+            <a
+              className="text-light"
+              href="#pablo"
+              onClick={(e) => {
+                e.preventDefault();
+                getToReset();
+              }}
+            >
+              <small><L>Mot de passe oublier ?</L></small>
+            </a>
+          </Col>
               <div className="text-center">
                 <Button className="my-4" color="primary" type="submit">
                  <L>Se connecté</L>
                 </Button>
               </div>
             </Form>
+            <Nav className="nav-footer justify-content-center footer_nav">
+               
+                <NavItem>
+                  <NavLink
+                    href=""
+                    target="_blank"
+                  >
+                  <L>A props</L>
+                  </NavLink>
+                </NavItem>
+
+                <NavItem>
+                  <NavLink
+                    href="https://cviotek.com/contact/"
+                    target="_blank"
+                  >  <L>Contact</L>
+                    
+                  </NavLink>
+                </NavItem>
+
+                <NavItem>
+                  <NavLink
+                    href="https://cviotek.com/politique-de-confidentialite/"
+                    target="_blank"
+                  ><L>Politique de confidentialité</L>
+                   
+                  </NavLink>
+
+                  
+                </NavItem>
+
+    
+              </Nav>
           </CardBody>
         </Card>
         <Row className="mt-3">

@@ -1,37 +1,26 @@
 import React from "react";
-import { useLocation, Route, Switch, Redirect } from "react-router-dom";
+import {  Route, Switch, Redirect, useLocation } from "react-router-dom";
 // reactstrap components
 import { Container, Row, Col } from "reactstrap";
 
 // core components
 import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import AuthFooter from "components/Footers/AuthFooter.js";
-import AuthService from "../services/auth.service"
-
-
+import AuthService from "../services/auth.service";
 import routes from "routes.js";
 
-import ReactGA from 'react-ga';
-const TRACKING_ID = "G-72HD2DDGEN";
-ReactGA.initialize(TRACKING_ID);
 
 const Auth = (props) => {
+
   const mainContent = React.useRef(null);
   const location = useLocation();
 
   React.useEffect(() => {
-  
     document.body.classList.add("body-bg");
     return () => {
       document.body.classList.remove("bg-default");
     };
   }, []);
-
-  React.useEffect(() => {
-    console.log("analytics" + window.location.pathname + window.location.search)
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }, []);
-
   
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -70,7 +59,7 @@ const Auth = (props) => {
           </Row>
         </Container>
       </div>
-      <AuthFooter cls="fixed-footer" />
+     
     </>
   );
 };

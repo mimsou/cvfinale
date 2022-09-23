@@ -113,6 +113,7 @@ const ExperienceProfessionel = (props) => {
   };
 
   const addPoste = () => {
+    if (!props.checkData(props.name,DataModel)) return false;
     if (!UpdateMode) {
       let datamodelcopy = jsonCopy(DataModel);
       let datacollectcopy = [...DataModelCollection];

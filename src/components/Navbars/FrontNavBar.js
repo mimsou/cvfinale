@@ -27,6 +27,9 @@ const FrontNavBar = (props) => {
       case "logout":
         logout();
         break;
+        case "cv" : 
+        goToCv();
+        break;
     }
     setAnchorEl(null);
   };
@@ -45,6 +48,10 @@ const FrontNavBar = (props) => {
     }
   }, [location]);
 
+  const goToCv = () => {
+    history.push("/app/user-information");
+  }
+
   const handleStepClick = (step) => {
     switch (step) {
       case 1:
@@ -60,6 +67,7 @@ const FrontNavBar = (props) => {
   };
 
   const logout = (e) => {
+    window.gtag("event", "Déconnection"); 
     AuthService.logout();
   };
 
@@ -85,6 +93,7 @@ const FrontNavBar = (props) => {
 
         <NavbarToggler
           onClick={() => {
+            window.gtag("event", "Affichage menu mobile");
             setCollapsed(!collapsed);
           }}
         />
@@ -148,7 +157,10 @@ const FrontNavBar = (props) => {
                 }}
               >
                 <MenuItem onClick={() => handleClose("logout")}>
-                  Logout
+                 <L>Déconnection</L> 
+                </MenuItem>
+                <MenuItem onClick={() => handleClose("cv")}>
+                  <L>Mes CV</L>
                 </MenuItem>
               </Menu>
             </NavItem>

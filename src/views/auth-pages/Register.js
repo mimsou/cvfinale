@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState , useEffect } from "react";
 
 import { useInput } from "../../hooks/inputHook";
 
@@ -24,11 +24,14 @@ import {
 } from "reactstrap";
 import { LanguageContext } from "localeContext";
 import LangPicker from "components/special/Helper-component/LangPicker";
+import { usePageTracking } from "hooks/usePageTracking";
 
 const Register = () => {
 
+  let Tracker = usePageTracking();
 
- 
+
+  const [Error, setError] = useState(false);
 
   let history = useHistory();
 
@@ -52,17 +55,21 @@ const Register = () => {
   } = useInput("");
 
   const handleRegistration = (e) => {
+
     e.preventDefault();
 
     if (password !== repassword) {
-     
+      setError(2)
     } else {
       AuthService.registration(name, login, email, password).then(
         () => {
+          setError(false)
           history.push("/auth/login");
+          window.gtag("event", "Enregistrement classic"); 
         },
         (error) => {
-          L({children:"E-mail déja registré"})
+          setError(1)
+          window.gtag("event", "Erreur enregistrement classic"); 
         }
       );
     }
@@ -80,9 +87,18 @@ const Register = () => {
           
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
-              <small>Inscription</small>
+              <small><L>Inscription</L></small>
             </div>
-            <Form onSubmit={handleRegistration} role="form">
+            { Error && <div className="error_container">
+              { Error && Error == 1 &&
+                     <L>Email que vous avez introduit existe déja</L>
+              }
+
+              { Error && Error == 2 &&
+                     <L>Les mots de passes introduits ne sont pas identique</L>
+              }
+            </div>}
+            <Form onSubmit={(e)=>handleRegistration(e)} role="form">
               <FormGroup>
                 <InputGroup className="input-group-alternative mb-3">
                   <InputGroupAddon addonType="prepend">
@@ -90,7 +106,7 @@ const Register = () => {
                       <i className="ni ni-hat-3" />
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input {...bindName} placeholder={L({children:"Nom prénom"})} type="text" />
+                  <Input required {...bindName} placeholder={L({children:"Nom prénom"})} type="text" />
                 </InputGroup>
               </FormGroup>
               <FormGroup>
@@ -101,6 +117,7 @@ const Register = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
+                     required
                     {...bindEmail}
                      placeholder={L({children:"E-mail"})}
                     type="email"
@@ -116,6 +133,7 @@ const Register = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
+                     required
                     {...bindPassword}
                      placeholder={L({children:"mot de pass"})}
                     type="password"
@@ -132,6 +150,7 @@ const Register = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
+                     required
                     {...bindRepassword}
                     placeholder=  {L({children:"Verification mot-de-pass"})}
                     type="password"
@@ -158,7 +177,7 @@ const Register = () => {
                     >
                       <span className="text-muted">
                         <L>j'accepte la politique de securité</L>{" "}
-                        <a href="" onClick={(e) => e.preventDefault()}>
+                        <a href="https://cviotek.com/politique-de-confidentialite/" onClick={(e) => e.preventDefault()}>
                           <L>Politique</L>
                         </a>
                       </span>

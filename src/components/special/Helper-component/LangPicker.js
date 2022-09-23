@@ -16,9 +16,29 @@ const LangPicker = (props) => {
     "fr":FrSvg
   }
 
+  const isLanding = () =>{
+    if(props?.landing){
+      return true
+    }
+    return false
+  }
+ 
   const handleLanguageChange = (lang) => {
-       props.setLanguage(lang)
-       setLanguage(lang)
+       window.gtag("event", "Changement de langue"); 
+       
+       if(isLanding()){
+
+        if(lang=="en"){
+          window.location.replace("https://app.cviotek.com/"+lang)
+        }else{
+          window.location.replace("https://app.cviotek.com/")
+        }
+           
+       }else{
+        props.setLanguage(lang)
+        setLanguage(lang)
+       }
+     
   };
 
   return (

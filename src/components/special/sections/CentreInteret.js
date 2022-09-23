@@ -29,6 +29,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PositionWidget from "../Helper-component/PositionWidget";
 
 const Langue = (props) => {
+  
   const jsonCopy = (src) => {
     return JSON.parse(JSON.stringify(src));
   };
@@ -89,6 +90,9 @@ const Langue = (props) => {
   };
 
   const addFormation = () => {
+
+    if (!props.checkData(props.name,DataModel)) return false;
+
     if (!UpdateMode) {
       let datamodelcopy = jsonCopy(DataModel);
       let datacollectcopy = [...DataModelCollection];

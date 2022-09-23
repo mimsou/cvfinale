@@ -1,10 +1,15 @@
-import React from "react";
-import { useLocation, Route, Switch, Redirect } from "react-router-dom";
+import React, { useEffect } from "react";
+import {  Route, Switch, Redirect  } from "react-router-dom";
 import AuthFooter from "components/Footers/AuthFooter.js";
 import AuthService from "../services/auth.service"
 import routes from "routes.js";
 
+
+
 const Init = (props) => {
+
+  
+
   const mainContent = React.useRef(null);
 
   const getRoutes = (routes) => {

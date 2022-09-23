@@ -5,6 +5,8 @@ import Landing from "./views/public-pages/Landing";
 import UserInformaion from "views/front-pages/UserInformaion.js";
 import Publishing from "views/front-pages/Publishing";
 import Templating from "views/front-pages/Templating";
+import PasswordRecovery from "views/auth-pages/passwordRecovery";
+import PasswordReset from "views/auth-pages/passwordReset";
 
 var routes = [
   {
@@ -53,6 +55,19 @@ var routes = [
     name: "registration",
     icon: "ni ni-key-25 text-info",
     component: Register,
+    layout: "/auth",
+  },{
+    path: "/paswordreset",
+    name: "Password Reset",
+    icon: "ni ni-key-25 text-info",
+    component: PasswordRecovery,
+    layout: "/auth",
+  },
+  ,{
+    path: "/paswordset/:token",
+    name: "Password Reset",
+    icon: "ni ni-key-25 text-info",
+    component: PasswordReset,
     layout: "/auth",
   },
 

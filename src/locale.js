@@ -11,7 +11,10 @@ const Locales = (props) => {
         return Childtext;
     }else{
         const loc =all[lang];
-        return loc[Childtext.trim()] ? loc[Childtext.trim()] : Childtext;
+        if(typeof Childtext.trim == "function"){
+            return loc[Childtext.trim()] ? loc[Childtext.trim()] : Childtext;
+        }
+        return Childtext; 
     }
 
 }
